@@ -3,16 +3,21 @@ import React, {Component} from 'react';
 class ChatBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {user: this.props.User, messageContent: ''};
+    //find out why using this.props.User
+    this.state = {
+      user: this.props.User,
+      messageContent: ''
+    };
+    console.log("this.state: ", this.state);
+    console.log("this.props: ", this.props);
+    console.log('this example: ', this.props.example);
   }
 
   handleUserNameChange(event) {
-    console.log('current value of user name input', event.target.value);
     this.setState({user: event.target.value});
   }
 
   handleMessageContentChange(event) {
-    console.log('current value of message content input', event.target.value);
     this.setState({messageContent: event.target.value});
   }
 
@@ -23,7 +28,6 @@ class ChatBar extends Component {
   }
 
   render() {
-    console.log("Rendering <ChatBar/>");
     const chatbarContext = this;
     return (
     <footer className="chatbar">
