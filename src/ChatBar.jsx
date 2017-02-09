@@ -28,19 +28,18 @@ class ChatBar extends Component {
   }
 
   render() {
-    const chatbarContext = this;
     return (
     <footer className="chatbar">
 
       <input className="chatbar-username"
         value={this.state.user}
-        onChange={this.handleUserNameChange.bind(chatbarContext)} />
+        onChange={this.handleUserNameChange.bind(this)} />
 
       <input className="chatbar-message"
         placeholder="Type a message and hit ENTER"
         value={this.state.messageContent}
-        onChange={this.handleMessageContentChange.bind(chatbarContext)}
-        onKeyDown={this.handleEnterKey.bind(chatbarContext)}/>
+        onChange={this.handleMessageContentChange.bind(this)}
+        onKeyDown={this.handleEnterKey.bind(this)}/>
 
     </footer>
     );
