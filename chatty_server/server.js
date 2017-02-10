@@ -17,7 +17,7 @@ wss.on('connection', (ws) => {
   let message = {
     type: 'counter',
     countConnection: countConnection
-  }
+  };
 
   broadcast(message);
 
@@ -51,16 +51,16 @@ wss.on('connection', (ws) => {
         ws.send(newData);
       }
     });
-  };
+  }
 
   ws.on('close', () => {
-    console.log('Client disconnected')
-    countConnection--
+    console.log('Client disconnected');
+    countConnection--;
     let message = {
-    type: 'counter',
-    countConnection: countConnection
-  }
-  broadcast(message);
+      type: 'counter',
+      countConnection: countConnection
+    };
+    broadcast(message);
     console.log("client minus: ", countConnection);
 
   });

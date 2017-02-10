@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-
-
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx'
 const uuid = require('node-uuid');
-const id = uuid.v1();
-console.log('id: ', id);
+
 class App extends Component {
 
   constructor(props) {
@@ -13,14 +10,13 @@ class App extends Component {
     this.state = {
       currentUser: {name: "Bob"},
       messages: [],
-      countConnection: 0
     }
   }
 
   addMessage(username, message) {
     const userMessage = {
       type: "postMessage",
-      id: id,
+      id: uuid.v1(),
       user: username,
       content: message
     }
@@ -35,7 +31,7 @@ class App extends Component {
   addNotification(content) {
     const notification = {
       type: "postNotification",
-      id: id,
+      id: uuid.v1(),
       content: content
     }
     this.socket.send(JSON.stringify(notification));
@@ -50,11 +46,12 @@ class App extends Component {
     };
     this.socket.onmessage = (event) => {
       const messageBroad = JSON.parse(event.data);
-      const newMessageList = this.state.messages.concat(messageBroad);
 
       if (messageBroad.type === 'counter') {
-        this.setState({countConnection: messageBroad.countConnection})
+        return (
+        this.setState({countConnection: messageBroad.countConnection}))
       }
+      const newMessageList = this.state.messages.concat(messageBroad);
       this.setState({messages: newMessageList})
     };
     setTimeout(() => {
