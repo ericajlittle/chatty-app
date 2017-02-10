@@ -5,16 +5,24 @@ class ChatBar extends Component {
     super(props);
     //find out why using this.props.User
     this.state = {
-      user: this.props.User,
+      username: this.props.username,
       messageContent: ''
     };
+
     console.log("this.state: ", this.state);
     console.log("this.props: ", this.props);
     console.log('this example: ', this.props.example);
   }
 
+
+  handleUserBlur(event) {
+    this.props.updateUsername(event.target.value);
+  }
+  // client sends
+  // {"type": "postNotification", "content": "UserA has changed their name to UserB."}
+
   handleUserNameChange(event) {
-    this.setState({user: event.target.value});
+    this.setState({username: event.target.value});
   }
 
   handleMessageContentChange(event) {
@@ -23,7 +31,7 @@ class ChatBar extends Component {
 
   handleEnterKey(event) {
     if (event.key === 'Enter') {
-      this.props.newMessage(this.state.user, this.state.messageContent);
+      this.props.newMessage(this.state.username, this.state.messageContent);
     }
   }
 
@@ -32,8 +40,9 @@ class ChatBar extends Component {
     <footer className="chatbar">
 
       <input className="chatbar-username"
-        value={this.state.user}
-        onChange={this.handleUserNameChange.bind(this)} />
+        value={this.state.username}
+        onChange={this.handleUserNameChange.bind(this)}
+        onBlur={this.handleUserBlur.bind(this)}/>
 
       <input className="chatbar-message"
         placeholder="Type a message and hit ENTER"
