@@ -11,9 +11,6 @@ const wss = new SocketServer({ server });
 
 var countConnection = 0;
 
-
-
-
 wss.on('connection', (ws) => {
   console.log('Client connected');
   countConnection++;
@@ -21,6 +18,7 @@ wss.on('connection', (ws) => {
     type: 'counter',
     countConnection: countConnection
   }
+
   broadcast(message);
 
   ws.on('message', function incoming(message) {
@@ -51,12 +49,10 @@ wss.on('connection', (ws) => {
       if (ws.readyState === WebSocket.OPEN) {
         newData = JSON.stringify(data);
         ws.send(newData);
-        // console.log('newData: ', newData);
       }
     });
   };
 
-  // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
     console.log('Client disconnected')
     countConnection--
