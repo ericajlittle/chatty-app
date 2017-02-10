@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 class ChatBar extends Component {
   constructor(props) {
     super(props);
-    //find out why using this.props.User
     this.state = {
       username: this.props.username,
       messageContent: ''
@@ -18,8 +17,6 @@ class ChatBar extends Component {
   handleUserBlur(event) {
     this.props.updateUsername(event.target.value);
   }
-  // client sends
-  // {"type": "postNotification", "content": "UserA has changed their name to UserB."}
 
   handleUserNameChange(event) {
     this.setState({username: event.target.value});
