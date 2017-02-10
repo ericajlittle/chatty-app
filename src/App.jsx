@@ -4,7 +4,8 @@ import React, {Component} from 'react';
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx'
 const uuid = require('node-uuid');
-
+const id = uuid.v1();
+console.log('id: ', id);
 class App extends Component {
 
   constructor(props) {
@@ -19,7 +20,7 @@ class App extends Component {
   addMessage(username, message) {
     const userMessage = {
       type: "postMessage",
-      id: uuid.v1(),
+      id: id,
       user: username,
       content: message
     }
@@ -34,7 +35,7 @@ class App extends Component {
   addNotification(content) {
     const notification = {
       type: "postNotification",
-      id: uuid.v1(),
+      id: id,
       content: content
     }
     this.socket.send(JSON.stringify(notification));

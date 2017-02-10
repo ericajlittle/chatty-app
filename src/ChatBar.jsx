@@ -24,11 +24,13 @@ class ChatBar extends Component {
 
   handleMessageContentChange(event) {
     this.setState({messageContent: event.target.value});
+
   }
 
   handleEnterKey(event) {
     if (event.key === 'Enter') {
       this.props.newMessage(this.state.username, this.state.messageContent);
+      this.setState({messageContent: ""});
     }
   }
 
